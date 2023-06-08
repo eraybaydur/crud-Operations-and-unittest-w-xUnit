@@ -50,12 +50,20 @@ namespace Services
 
         public List<PersonResponse> GetAllPersons()
         {
-            throw new NotImplementedException();
+            return _persons.Select(temp => temp.ToPersonResponse()).ToList();
         }
 
         public PersonResponse? GetPersonByPersonId(Guid? personId)
         {
-            throw new NotImplementedException();
+            if (personId == null)
+                return null;
+
+            Person? person = _persons.FirstOrDefault(p => p.PersonId == personId);
+            if (person == null)
+                return null;
+
+            return person.ToPersonResponse();
+
         }
     }
 }
